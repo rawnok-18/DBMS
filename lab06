@@ -1,0 +1,58 @@
+CREATE TABLE account (
+    c_id int,
+    c_name varchar(20),
+    c_gender varchar(20),
+    c_address varchar(20)
+    );
+ INSERT INTO account (c_id, c_name, c_gender, c_address)
+ VALUES (1, "Uchiha Madara", "Male", "AShulia,Savar"),
+ (2,"Nezuko Chan","female","Birulia,Savar"),
+ (3,"Rafi Chan", "Male","Uttara,Dhaka");
+
+
+CREATE TABLE loan (
+    loan_id int,
+    loan_amount varchar(20),
+    loan_date varchar(20),
+    c_id int
+    );
+ INSERT INTO loan (loan_id, loan_amount, loan_date, c_id)
+ VALUES (101, "90090", "23-02-24", 1),
+ (102,"90050","24-07-24", 2),
+ (103,"100010", "15-02-24",3);
+
+
+CREATE TABLE depositor (
+    d_id int,
+    d_amount varchar(20),
+    d_date varchar(20),
+    c_id int
+    );
+ INSERT INTO depositor (d_id, d_amount, d_date, c_id)
+ VALUES (201, "90200", "23-02-24", 1),
+ (202,"90010","24-07-24", 2),
+ (203,"105010", "15-02-24",3);
+
+ALTER TABLE account
+ADD PRIMARY KEY (c_id);
+
+
+ALTER TABLE depositor
+ADD FOREIGN KEY (c_id) REFERENCES account(c_id);
+
+ALTER TABLE loan
+ADD FOREIGN KEY (c_id) REFERENCES account(c_id);
+
+ALTER TABLE depositor
+ADD branch_name varchar (20);
+
+UPDATE depositor
+SET branch_name = "Ashulia" WHERE d_id = 201;
+
+UPDATE depositor
+SET branch_name = "Birulia" WHERE d_id = 202;
+
+UPDATE depositor
+SET branch_name = "Savar" WHERE d_id = 201;
+
+SELECT loan_id from loan WHERE loan_amount BETWEEN 90000 and 100000;
